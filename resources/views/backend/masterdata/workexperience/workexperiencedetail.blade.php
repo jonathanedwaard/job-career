@@ -28,6 +28,20 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="sequence" class="col-md-1 col-form-label text-md-left">Sequence</label>
+
+                                <div class="col-md-5">
+                                    <input id="sequence" type="text" class="form-control @error('sequence') is-invalid @enderror" name="sequence" value="{{ $items->sequence }}" required autocomplete="sequence" autofocus>
+
+                                    @error('sequence')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="isactive" class="col-md-1 col-form-label text-md-left">Active</label>
 
                                 <div class="col-md-1 d-flex align-items-center justify-content-start">

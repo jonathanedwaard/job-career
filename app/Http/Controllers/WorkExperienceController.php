@@ -33,7 +33,8 @@ class WorkExperienceController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            "name"=>"required",
+            "sequence"=>"required",
+            "name"=>"required"
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -43,6 +44,7 @@ class WorkExperienceController extends Controller
 
         WorkExperience::insert([
             "name"=>$request->name,
+            "sequence"=>$request->sequence,
             "createdby"=>Auth::user()->id,
             "created_at"=>Carbon::now(),
             "updatedby"=>Auth::user()->id,
@@ -76,6 +78,7 @@ class WorkExperienceController extends Controller
     {
         $rules = [
             "name"=>"required",
+            "sequence"=>"required"
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -87,6 +90,7 @@ class WorkExperienceController extends Controller
 
         WorkExperience::where("id", $id)->update([
             "name"=>$request->name,
+            "sequence"=>$request->sequence,
             "isactive"=>$isactive,
             "updatedby"=>Auth::user()->id,
             "updated_at"=>Carbon::now()

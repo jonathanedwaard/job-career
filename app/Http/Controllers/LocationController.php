@@ -49,7 +49,7 @@ class LocationController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/location");
+        return redirect("/backend/location")->with('message', 'Save successfully!');
     }
 
     /**
@@ -92,7 +92,7 @@ class LocationController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/location");
+        return redirect("/backend/location")->with('message', 'Save successfully!');
     }
 
     /**
@@ -105,6 +105,6 @@ class LocationController extends Controller
             $items->delete();
         }
 
-        return redirect("/backend/location");
+        return redirect("/backend/location")->with('message', 'Delete successfully!');
     }
 }

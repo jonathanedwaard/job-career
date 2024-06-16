@@ -33,7 +33,8 @@ class EducationController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            "name"=>"required",
+            "sequence"=>"required",
+            "name"=>"required"
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -42,6 +43,7 @@ class EducationController extends Controller
         }
 
         Education::insert([
+            "sequence"=>$request->sequence,
             "name"=>$request->name,
             "createdby"=>Auth::user()->id,
             "created_at"=>Carbon::now(),
@@ -49,7 +51,7 @@ class EducationController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/education");
+        return redirect("/backend/education")->with('message', 'Save successfully!');
     }
 
     /**
@@ -76,6 +78,7 @@ class EducationController extends Controller
     {
         $rules = [
             "name"=>"required",
+            "sequence"=>"required"
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -86,13 +89,14 @@ class EducationController extends Controller
         $isactive = $request->has('isactive') ? 'Y' : 'N';
 
         Education::where("id", $id)->update([
+            "sequence"=>$request->sequence,
             "name"=>$request->name,
             "isactive"=>$isactive,
             "updatedby"=>Auth::user()->id,
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/education");
+        return redirect("/backend/education")->with('message', 'Save successfully!');
     }
 
     /**
@@ -105,6 +109,6 @@ class EducationController extends Controller
             $items->delete();
         }
 
-        return redirect("/backend/education");
+        return redirect("/backend/education")->with('message', 'Delete successfully!');
     }
 }

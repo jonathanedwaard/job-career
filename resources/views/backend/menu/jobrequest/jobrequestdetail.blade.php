@@ -140,7 +140,7 @@
                                 <label for="description" class="col-md-2 col-form-label text-md-left">Description</label>
 
                                 <div class="col-md-4">
-                                    <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ $items->description }}" required autocomplete="description" autofocus>
+                                    <textarea id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description" autofocus>{{ $items->description }}</textarea>
 
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
@@ -154,7 +154,7 @@
                                 <label for="requirement" class="col-md-2 col-form-label text-md-left">Requirement</label>
 
                                 <div class="col-md-4">
-                                    <input id="requirement" type="text" class="form-control @error('requirement') is-invalid @enderror" name="requirement" value="{{ $items->requirement }}" required autocomplete="requirement" autofocus>
+                                    <textarea id="requirement" type="text" class="form-control @error('requirement') is-invalid @enderror" name="requirement" required autocomplete="requirement" autofocus>{{ $items->requirement }}</textarea>
 
                                     @error('requirement')
                                         <span class="invalid-feedback" role="alert">

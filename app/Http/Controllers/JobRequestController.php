@@ -72,7 +72,7 @@ class JobRequestController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobrequest");
+        return redirect("/backend/jobrequest")->with('message', 'Save successfully!');
     }
 
     /**
@@ -108,6 +108,9 @@ class JobRequestController extends Controller
             "location"=>"required",
             "education"=>"required",
             "workexperience"=>"required",
+            "salary"=>"required",
+            "description"=>"required",
+            "requirement"=>"required",
             "quota"=>"required|numeric|min:1"
         ];
 
@@ -125,6 +128,9 @@ class JobRequestController extends Controller
             "education"=>$request->education,
             "workexperience"=>$request->workexperience,
             "quota"=>$request->quota,
+            "salary"=>$request->salary,
+            "description"=>$request->description,
+            "requirement"=>$request->requirement,
             "isactive"=>$isactive,
             "createdby"=>Auth::user()->id,
             "created_at"=>Carbon::now(),
@@ -132,7 +138,7 @@ class JobRequestController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobrequest");
+        return redirect("/backend/jobrequest")->with('message', 'Save successfully!');
     }
 
     /**
@@ -145,6 +151,6 @@ class JobRequestController extends Controller
             $items->delete();
         }
 
-        return redirect("/backend/jobrequest");
+        return redirect("/backend/jobrequest")->with('message', 'Delete successfully!');
     }
 }

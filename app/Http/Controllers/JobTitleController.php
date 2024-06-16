@@ -53,7 +53,7 @@ class JobTitleController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobtitle");
+        return redirect("/backend/jobtitle")->with('message', 'Save successfully!');
     }
 
     /**
@@ -99,7 +99,7 @@ class JobTitleController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobtitle");
+        return redirect("/backend/jobtitle")->with('message', 'Save successfully!');
     }
 
     /**
@@ -112,6 +112,6 @@ class JobTitleController extends Controller
             $items->delete();
         }
 
-        return redirect("/backend/jobtitle");
+        return redirect("/backend/jobtitle")->with('message', 'Delete successfully!');
     }
 }

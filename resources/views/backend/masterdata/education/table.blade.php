@@ -14,12 +14,18 @@
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Education</h6>
         </div>
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Sequence</th>
                             <th>Name</th>
                             <th>Is Active</th>
                             <th></th>
@@ -30,7 +36,8 @@
                         @foreach($items as $item)
                         <tr>
                             <td width="5%">{{ $loop->iteration }}</td>
-                            <td width="80%">{{ $item->name }}</td>
+                            <td width="10%">{{ $item->sequence }}</td>
+                            <td width="70%">{{ $item->name }}</td>
                             <td width="10%">
                                 @if($item->isactive == 'Y')
                                     Yes

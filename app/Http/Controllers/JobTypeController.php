@@ -49,7 +49,7 @@ class JobTypeController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobtype");
+        return redirect("/backend/jobtype")->with('message', 'Save successfully!');
     }
 
     /**
@@ -92,7 +92,7 @@ class JobTypeController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobtype");
+        return redirect("/backend/jobtype")->with('message', 'Save successfully!');
     }
 
     /**
@@ -105,6 +105,6 @@ class JobTypeController extends Controller
             $items->delete();
         }
 
-        return redirect("/backend/jobtype");
+        return redirect("/backend/jobtype")->with('message', 'Delete successfully!');
     }
 }

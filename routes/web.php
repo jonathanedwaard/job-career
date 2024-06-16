@@ -11,6 +11,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WorkExperienceController;
 use App\Http\Controllers\JobRequestController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ApplicantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,8 +69,10 @@ Route::delete('/backend/location/{id}', [LocationController::class,'destroy'])->
 
 // User
 Route::get('/backend/login', [UserController::class,'login']);
+Route::get('/backend/register', [UserController::class,'registerView']);
 Route::post('/backend/login', [UserController::class,'authenticate'])->name('login');
-Route::get('/backend/logout', [UserController::class,'logout'])->name('logout')->middleware('admin');
+Route::post('/backend/register', [UserController::class,'register'])->name('register');
+Route::get('/backend/logout', [UserController::class,'logout'])->name('logout');
 Route::get('/backend/user', [UserController::class,'index'])->middleware('admin');
 Route::get('/backend/create-user', [UserController::class,'create'])->middleware('admin');
 Route::post('/backend/create-user', [UserController::class,'store'])->name('create-user')->middleware('admin');
@@ -93,10 +97,31 @@ Route::post('/backend/jobrequest/{id}', [JobRequestController::class,'update'])-
 Route::delete('/backend/jobrequest/{id}', [JobRequestController::class,'destroy'])->name('delete-jobrequest')->middleware('admin');
 
 // Work Experience
+
+// Applicant
+
+Route::get('/backend/applicant', [ApplicantController::class,'index'])->middleware('admin');
+Route::get('/backend/applicant/{id}', [ApplicantController::class,'show'])->middleware('admin');
+Route::post('/backend/applicant/{id}/accept', [ApplicantController::class, 'acceptApplicant'])->name('accept-applicant')->middleware('admin');
+Route::post('/backend/applicant/{id}/reject', [ApplicantController::class, 'rejectApplicant'])->name('reject-applicant')->middleware('admin');
+Route::post('/backend/applicant/{id}/interview', [ApplicantController::class, 'interviewApplicant'])->name('interview-applicant')->middleware('admin');
+Route::post('/frontend/jobdetail/{id}', [ApplicantController::class,'store'])->name("apply-job");
+
+// Applicant
+
 Route::get('/backend/dashboard', [DashboardController::class,'index'])->middleware('admin');
 
 // End Backend Routes
 
-Route::get('/', function () {
-    return view('backend.masterdata.education.table');
-});
+// Start Frontend Routes
+
+Route::get('/', [FrontendController::class,'home']);
+Route::get('/frontend/career', [FrontendController::class,'career']);
+Route::get('/frontend/internship', [FrontendController::class,'internship']);
+Route::get('/frontend/faq', [FrontendController::class,'faq']);
+Route::get('/frontend/aboutus', [FrontendController::class,'aboutus']);
+Route::get('/frontend/privacy', [FrontendController::class,'privacy']);
+Route::get('/frontend/jobdetail/{id}', [FrontendController::class,'jobdetail']);
+Route::post('/frontend/searchjob', [FrontendController::class,'searchjob'])->name('search-job');
+
+// End Frontend Routes

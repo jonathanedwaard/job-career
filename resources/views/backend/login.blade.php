@@ -49,20 +49,25 @@
 
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="email" aria-describedby="emailHelp" name="email"
+                                                id="email" aria-describedby="email" name="email"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
                                                 id="password" placeholder="Password" name="password">
                                         </div>
+                                        @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
                                         <button type="submit" class="btn btn-warning fw-bold btn-user btn-block">
                                             Login
                                         </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <p class="text-white fw-bold small">Don’t have an account? <span class="text-warning">Please contact admin</span></p>
+                                        <p class="text-white fw-bold small">Don’t have an account? <a href="register" class="text-warning">Click here to register</a></p>
                                     </div>
                                 </div>
                             </div>

@@ -20,8 +20,8 @@ return new class extends Migration
             $table->unsignedBigInteger('workexperience');
             $table->integer('quota');
             $table->integer('salary');
-            $table->string('description');
-            $table->string('requirement');
+            $table->string('description', 500);
+            $table->string('requirement', 500);
             $table->string('isactive')->default('Y');
             $table->unsignedBigInteger('createdby');
             $table->unsignedBigInteger('updatedby');

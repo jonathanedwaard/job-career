@@ -49,7 +49,7 @@ class JobSpecializationController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobspecialization");
+        return redirect("/backend/jobspecialization")->with('message', 'Save successfully!');
     }
 
     /**
@@ -92,7 +92,7 @@ class JobSpecializationController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/jobspecialization");
+        return redirect("/backend/jobspecialization")->with('message', 'Save successfully!');
     }
 
     /**
@@ -105,6 +105,6 @@ class JobSpecializationController extends Controller
             $items->delete();
         }
 
-        return redirect("/backend/jobspecialization");
+        return redirect("/backend/jobspecialization")->with('message', 'Delete successfully!');
     }
 }

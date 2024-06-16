@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\JobSpecialization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,15 @@ class UserController extends Controller
     }
 
     /**
+     * Show the form for creating a new resource.
+     */
+    public function registerView()
+    {
+        $items = JobSpecialization::all();
+        return view('backend.register', compact('items'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -49,12 +59,45 @@ class UserController extends Controller
             "email"=>$request->email,
             "password"=>bcrypt($request->password),
             "dateofbirth"=>$request->dob,
+            "jobspecialization"=>0,
             "role"=>"Admin",
             "created_at"=>Carbon::now(),
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/user");
+        return redirect("/backend/user")->with('message', 'Save successfully!');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function register(Request $request)
+    {
+        $rules = [
+            "name"=>"required | min:5",
+            "email"=>"required | email | unique:users",
+            "password"=>"required | min:8",
+            "jobspecialization"=>"required",
+            "dob"=>"required"
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if($validator->fails()){
+            return back()->withErrors($validator);
+        }
+
+        User::insert([
+            "name"=>$request->name,
+            "email"=>$request->email,
+            "password"=>bcrypt($request->password),
+            "dateofbirth"=>$request->dob,
+            "jobspecialization"=>$request->jobspecialization,
+            "role"=>"User",
+            "created_at"=>Carbon::now(),
+            "updated_at"=>Carbon::now()
+        ]);
+
+        return redirect("/");
     }
 
     /**
@@ -102,7 +145,7 @@ class UserController extends Controller
             "updated_at"=>Carbon::now()
         ]);
 
-        return redirect("/backend/user");
+        return redirect("/backend/user")->with('message', 'Save successfully!');
     }
 
     /**
@@ -126,7 +169,7 @@ class UserController extends Controller
      */
     public function logout() {
         Auth::logout();
-        return redirect("/backend/login");
+        return redirect("/");
     }
 
     /**
@@ -150,7 +193,7 @@ class UserController extends Controller
         }
 
         if(Auth::attempt($credential)) {
-            return redirect("/backend/dashboard");
+            return redirect("/");
         }
         return redirect("/backend/login");
     }

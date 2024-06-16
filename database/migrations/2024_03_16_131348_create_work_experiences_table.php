@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('work_experiences', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer("sequence");
             $table->string('isactive')->default('Y');
             $table->unsignedBigInteger('createdby');
             $table->unsignedBigInteger('updatedby');
