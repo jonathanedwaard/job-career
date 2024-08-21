@@ -186,14 +186,12 @@ class ApplicantController extends Controller
 
     public function rejectApplicant($id) {
         $items = Applicant::find($id);
+        $candidateName = $items->users->name;
+        $candidateEmail = $items->users->email;
+        
         if(isset($items)) {
             $items->delete();
         }
-
-        $items = Applicant::find($id);
-        $candidateName = $items->users->name;
-        $candidateEmail = $items->users->email;
-
         Mail::to($candidateEmail)->send(new Rejected($candidateName));
 
         return redirect("/backend/applicant")->with('message', 'Applicant rejected successfully!');
